@@ -1,2 +1,41 @@
+* {
+  margin: 0; }
+
+.main {
+  background-color: black;
+  height: auto; }
+
+.title {
+  color: aqua;
+  padding: 10px 15px; }
+
+.form {
+  padding: 10px 15px; }
+
+.input {
+  width: 270px;
+  height: 22px;
+  border: 3px solid aqua;
+  border-radius: 3px;
+  background-color: black;
+  color: white;
+  font-size: 16px; }
+
+.button-search, .button-reset {
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  background-color: aqua;
+  opacity: 0.8;
+  border-radius: 5px;
+  height: 29px;
+  width: 65px;
+  margin-left: 10px; }
+
+.list-anime {
+  margin: 10px 15px; }
+
+.title-anime {
+  color: white; }
 
 /*# sourceMappingURL=main.css.map */

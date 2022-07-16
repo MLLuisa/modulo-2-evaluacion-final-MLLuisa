@@ -35,7 +35,12 @@ function renderAnime(animeSeriesList) {
     console.log('SEARCH-------', animeSeriesList)
     for (const eachTitlePhoto of animeSeriesList) {
         html += `<img src="${eachTitlePhoto.images.jpg.image_url}" alt="serie-anime" />
-    <h3>${eachTitlePhoto.title}</h3>`;
+    <h3 class="title-anime">${eachTitlePhoto.title}</h3>`;
+    // let noImage = "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png";
+    // let newImage = "https://via.placeholder.com/210x295/ﬀﬀﬀ/666666/?text=TV";
+    // if(eachTitlePhoto.images.jpg.image_url === noImage) {
+    //     html += `<img src="${newImage}" alt="new-image" />`;
+    // }
     }
     listAnime.innerHTML = html;
     
