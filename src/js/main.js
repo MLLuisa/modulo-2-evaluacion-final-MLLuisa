@@ -30,25 +30,26 @@ const buttonSearch = document.querySelector('.js-button-search');
 const inputSearch = document.querySelector('.js-input');
 let listAnime = document.querySelector('.js-list-anime');
 
+// Images/Placeholder
+const noImage = "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png";
+const newImage = "https://via.placeholder.com/210x295/ﬀﬀﬀ/666666/?text=TV";
+
 function renderAnime(animeSeriesList) {
     let html = "";
-    console.log('SEARCH-------', animeSeriesList)
     for (const eachTitlePhoto of animeSeriesList) {
+    if(eachTitlePhoto.images.jpg.image_url === noImage || eachTitlePhoto.images.jpg.image_url === null) {
+        html += `<img src="${newImage}" alt="new-image" /><h3 class="title-anime">${eachTitlePhoto.title}</h3>`;
+    } else {
         html += `<img src="${eachTitlePhoto.images.jpg.image_url}" alt="serie-anime" />
-    <h3 class="title-anime">${eachTitlePhoto.title}</h3>`;
-    // let noImage = "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png";
-    // let newImage = "https://via.placeholder.com/210x295/ﬀﬀﬀ/666666/?text=TV";
-    // if(eachTitlePhoto.images.jpg.image_url === noImage) {
-    //     html += `<img src="${newImage}" alt="new-image" />`;
-    // }
+        <h3 class="title-anime">${eachTitlePhoto.title}</h3>`;
+    }
     }
     listAnime.innerHTML = html;
-    
 }
 
 function handleClickSearch(ev) {
     ev.preventDefault();
-    const inputValue = inputSearch.value;
+    const inputValue = inputSearch.value.toLowerCase();
     fetch(`https://api.jikan.moe/v4/anime?q=${inputValue}`)
     .then((response) => response.json())
     .then((data) => renderAnime(data.data))
