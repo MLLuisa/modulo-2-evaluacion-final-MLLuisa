@@ -31,7 +31,15 @@ const inputSearch = document.querySelector('.js-input');
 let listAnime = document.querySelector('.js-list-anime');
 const listAnimeFavorite = document.querySelector('.js-list-anime-favorite');
 let animeSeriesList = [];
-let animeFavouriteList = [];
+let animeFavouriteList; // Animefavoritelist no habria que igualarlo a array vacio
+// Local storage
+/* Al cargar la pagina vemos el local storage y si hay algo, animeFavoriteList seria igual a lo que haya despues del hacer el get del local  (localStorage.getItem('animeFavList');)*/
+if(localStorage.getItem("animeFavouriteList")) {
+    animeFavouriteList = JSON.parse(localStorage.getItem("animeFavouriteList"))
+    renderFavoriteAnime(animeFavouriteList);
+} else {
+    animeFavouriteList = [];
+}
 
 // Images/Placeholder
 const noImage = "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png";
@@ -39,7 +47,6 @@ const newImage = "https://via.placeholder.com/210x295/ﬀﬀﬀ/666666/?text=TV"
 
 function addListenerToAnimeListItem() {
     const singleElement = document.querySelectorAll('.js-single-element');
-    console.log("single element list----",singleElement);
     for (const element of singleElement) {
         element.addEventListener("click" , handleClickFavourite);
     }
@@ -47,19 +54,11 @@ function addListenerToAnimeListItem() {
 
 function renderAnime(list) {
     let html = "";
-    let classFavourite = "";
     for (const eachTitlePhoto of list) {
-        const favouriteFindIndex = animeFavouriteList.findIndex((fav) => eachTitlePhoto.id === fav.id);
-        if(favouriteFindIndex === -1) {
-            classFavourite = "favorite";
-        } else {
-            classFavourite = "";
-        }
-
     if(eachTitlePhoto.images.jpg.image_url === noImage || eachTitlePhoto.images.jpg.image_url === null) {
-        html += `<li class="js-single-element ${classFavourite}" id="${eachTitlePhoto.mal_id}"><img src="${newImage}" alt="new-image" /><h3 class="title-anime">${eachTitlePhoto.title}</h3></li>`;
+        html += `<li class="js-single-element" id="${eachTitlePhoto.mal_id}"><img src="${newImage}" alt="new-image" /><h3 class="title-anime">${eachTitlePhoto.title}</h3></li>`;
     } else {
-        html += `<li class="js-single-element ${classFavourite}" id="${eachTitlePhoto.mal_id}"><img src="${eachTitlePhoto.images.jpg.image_url}" alt="serie-anime" />
+        html += `<li class="js-single-element" id="${eachTitlePhoto.mal_id}"><img src="${eachTitlePhoto.images.jpg.image_url}" alt="serie-anime" />
         <h3 class="title-anime">${eachTitlePhoto.title}</h3></li>`;
     }
     }
@@ -79,21 +78,19 @@ function renderFavoriteAnime(list) {
 }
 
 function handleClickFavourite(ev) {
-    const idSelected = parseInt(ev.target.parentElement.id);
+    let currentLiElement = ev.target.parentElement
+    const idSelected = parseInt(currentLiElement.id);
     const animeFound = animeSeriesList.find((anime) => anime.mal_id === idSelected);
     const animeFavourite = animeFavouriteList.findIndex((fav) => fav.mal_id === idSelected);
     if (animeFavourite === -1) {
-        // classFavourite = "favorite";
+        currentLiElement.classList.add("favorite");
         animeFavouriteList.push(animeFound);
-        //añado una clase y hacer push
     } else {
         animeFavouriteList.splice(animeFavouriteList, 1)
-        // quito la clase y hacer splice
+        currentLiElement.classList.remove("favorite");
     }
     renderFavoriteAnime(animeFavouriteList);
-
-    console.log(animeFavouriteList);
-    // return idSelected;
+    localStorage.setItem("animeFavouriteList", JSON.stringify(animeFavouriteList));
 }
 
 function handleClickSearch(ev) {
