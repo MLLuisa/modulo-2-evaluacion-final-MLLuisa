@@ -16,7 +16,6 @@ const inputSearch = document.querySelector('.js-input');
 let listAnime = document.querySelector('.js-list-anime');
 const listAnimeFavorite = document.querySelector('.js-list-anime-favorite');
 const buttonReset = document.querySelector('.js-button-reset');
-const removeAllFavList = document.querySelector('.js-fav-list-remove-all');
 let animeSeriesList = [];
 let animeFavouriteList; // Animefavoritelist no habria que igualarlo a array vacio
 // Local storage
@@ -101,12 +100,6 @@ if(buttonRemoveItemFavList) {
     }
 }
 
-function removeFavList(ev) {
-    ev.preventDefault();
-    listAnimeFavorite.innerHTML = "";
-    console.log("soy el click fav list");
-}
-
 // Fetch to anime api after user button search click
 function handleClickSearch(ev) {
     ev.preventDefault();
@@ -123,6 +116,3 @@ function handleClickSearch(ev) {
 
 buttonSearch.addEventListener("click" , handleClickSearch);
 buttonReset.addEventListener("click", handleClickReset);
-removeAllFavList.addEventListener("click", removeFavList);
-
-
