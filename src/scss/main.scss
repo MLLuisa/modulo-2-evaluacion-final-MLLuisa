@@ -103,6 +103,10 @@
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     color: red;
+    position: absolute;
+    top: 0;
+    left: 227px;
+    font-size: 20px;
 }
 
 .fa-solid:hover {
@@ -110,6 +114,7 @@
 }
 
 .js-single-element {
+    position: relative;
     width: 250px;
 }
 

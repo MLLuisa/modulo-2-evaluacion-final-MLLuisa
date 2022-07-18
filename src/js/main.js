@@ -23,13 +23,18 @@ PUNTO 5 BONUS
 1. Borrar favoritos del localStorage y otras cosas mas. Mirar el enunciado
 
 PUNTO 6
-1.[X] Afinar la maquetacion
+1. Afinar la maquetacion
+Tareas :
+1. boton X para poder cancelar los favoritos y los datos del local storage
+2. añadir o quitar series desde la derecha haciendo click sobre ellas y si buscamos series que son favoritas deberian estar resaltadas
+3. boton al final de favoritos para borrarlos todos
 */
 
 const buttonSearch = document.querySelector('.js-button-search');
 const inputSearch = document.querySelector('.js-input');
 let listAnime = document.querySelector('.js-list-anime');
 const listAnimeFavorite = document.querySelector('.js-list-anime-favorite');
+const buttonReset = document.querySelector('.js-button-reset');
 let animeSeriesList = [];
 let animeFavouriteList; // Animefavoritelist no habria que igualarlo a array vacio
 // Local storage
@@ -70,11 +75,10 @@ function renderFavoriteAnime(list) {
     let html = "";
     if(list.length > 0) {
         for (const listFavorite of list) {
-        html += `<li class="js-single-element " id="${listFavorite.mal_id}">
+        html += `<li class="js-single-element" id="${listFavorite.mal_id}">
         <i class="fa-solid fa-circle-xmark"></i><img src="${listFavorite.images.jpg.image_url}" alt="new-image" /><h3 class="title-anime list-favorite">${listFavorite.title}</h3></li>`;
     }
-    }
-    
+    } 
     listAnimeFavorite.innerHTML = html;
 }
 
@@ -94,6 +98,12 @@ function handleClickFavourite(ev) {
     localStorage.setItem("animeFavouriteList", JSON.stringify(animeFavouriteList));
 }
 
+function handleClickReset(ev){
+    ev.preventDefault();
+    inputSearch.value = "";
+    listAnime.innerHTML = "";
+    }
+
 function handleClickSearch(ev) {
     ev.preventDefault();
     const inputValue = inputSearch.value.toLowerCase();
@@ -108,5 +118,4 @@ function handleClickSearch(ev) {
 }
 
 buttonSearch.addEventListener("click" , handleClickSearch);
-
-
+buttonReset.addEventListener("click", handleClickReset);
