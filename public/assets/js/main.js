@@ -1,33 +1,14 @@
 'use strict';
-
-/* PUNTO 1 --> Hecho
-1. [X]Realizar estructura basica html (h1, input te tipo texto, boton "buscar" y un boton "reset", listado de resultados donde tenemos el cartel de la serie osea foto y el titulo)
-
-PUNTO 2
-1. [X]Escuchar un evento sobre el boton de busqueda para conectarse al API para ver que datos necesitamos
-2.[X] Para la URL hay que recoger el texto del input de la usuaria y concatenarlo en link
-3.[X] Para cada serie del resultado del input hay que pintar el cartel y el titulo de la serie
-4.[X] Algunas series no tiene foto, hay que detectar cuales son y asignarle una foto (https://via.placeholder.com/210x295/ﬀﬀﬀ/666666/?text=TV)
-5.[X] Para pintar en el html utilizamos el InnerHTML
-
-PUNTO 3
-1. Una vez que se vean los resultados de la busqueda, la usuario puede elegir los favoritos y hay que hacer click en una serie y tendra que pasar lo siguiente:
--->[X] color de fondo y de fuente se intercambian
--->[X] listado de favoritos en la izquierda (recomendable array para almacenar favoritos)
--->[X] series favoritas deben seguir apareciendo a la izquierda aunque la usuaria realice otra búsqueda
-
-PUNTO 4
-1.[X] Hay que almacenar el listado de favoritos en el localStorage. De esta forma, al recargar la página el listado de favoritos se debe mostrarse
-
+/*
 PUNTO 5 BONUS
 1. Borrar favoritos del localStorage y otras cosas mas. Mirar el enunciado
 
-PUNTO 6
+PUNTO 6 BONUS
 1. Afinar la maquetacion
 Tareas :
 1. boton X para poder cancelar los favoritos y los datos del local storage
 2. añadir o quitar series desde la derecha haciendo click sobre ellas y si buscamos series que son favoritas deberian estar resaltadas
-3. boton al final de favoritos para borrarlos todos
+3.[X] boton al final de favoritos para borrarlos todos
 */
 
 const buttonSearch = document.querySelector('.js-button-search');
@@ -35,6 +16,7 @@ const inputSearch = document.querySelector('.js-input');
 let listAnime = document.querySelector('.js-list-anime');
 const listAnimeFavorite = document.querySelector('.js-list-anime-favorite');
 const buttonReset = document.querySelector('.js-button-reset');
+const removeAllFavList = document.querySelector('.js-fav-list-remove-all');
 let animeSeriesList = [];
 let animeFavouriteList; // Animefavoritelist no habria que igualarlo a array vacio
 // Local storage
@@ -57,6 +39,7 @@ function addListenerToAnimeListItem() {
     }
 }
 
+// Shows the anime list afer input user
 function renderAnime(list) {
     let html = "";
     for (const eachTitlePhoto of list) {
@@ -71,17 +54,20 @@ function renderAnime(list) {
     addListenerToAnimeListItem();
 }
 
+// Show favourite anime list
 function renderFavoriteAnime(list) {
     let html = "";
     if(list.length > 0) {
         for (const listFavorite of list) {
         html += `<li class="js-single-element" id="${listFavorite.mal_id}">
-        <i class="fa-solid fa-circle-xmark"></i><img src="${listFavorite.images.jpg.image_url}" alt="new-image" /><h3 class="title-anime list-favorite">${listFavorite.title}</h3></li>`;
+        <img src="${listFavorite.images.jpg.image_url}" alt="new-image" /><h3 class="title-anime list-favorite">${listFavorite.title}</h3><button class="js-remove-item-button">X</button>
+        </li>`;
     }
     } 
     listAnimeFavorite.innerHTML = html;
 }
 
+// Show favorite after user click (left side) and list anime (right side)
 function handleClickFavourite(ev) {
     let currentLiElement = ev.target.parentElement
     const idSelected = parseInt(currentLiElement.id);
@@ -98,12 +84,30 @@ function handleClickFavourite(ev) {
     localStorage.setItem("animeFavouriteList", JSON.stringify(animeFavouriteList));
 }
 
+// Reset function to delete search and list anime
 function handleClickReset(ev){
     ev.preventDefault();
     inputSearch.value = "";
     listAnime.innerHTML = "";
-    }
+}
 
+// Click reset anime fav list
+const buttonRemoveItemFavList = document.querySelector('js-remove-item-button');
+if(buttonRemoveItemFavList) {
+    buttonRemoveItemFavList.addEventListener("click", handleRemoveFavoriteItem);
+    function handleRemoveFavoriteItem(ev) {
+        ev.preventDefault();
+        console.log("soy la X");
+    }
+}
+
+function removeFavList(ev) {
+    ev.preventDefault();
+    listAnimeFavorite.innerHTML = "";
+    console.log("soy el click fav list");
+}
+
+// Fetch to anime api after user button search click
 function handleClickSearch(ev) {
     ev.preventDefault();
     const inputValue = inputSearch.value.toLowerCase();
@@ -119,4 +123,8 @@ function handleClickSearch(ev) {
 
 buttonSearch.addEventListener("click" , handleClickSearch);
 buttonReset.addEventListener("click", handleClickReset);
+removeAllFavList.addEventListener("click", removeFavList);
+
+
+
 //# sourceMappingURL=main.js.map
