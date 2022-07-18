@@ -12,18 +12,18 @@ PUNTO 2
 
 PUNTO 3
 1. Una vez que se vean los resultados de la busqueda, la usuario puede elegir los favoritos y hay que hacer click en una serie y tendra que pasar lo siguiente:
---> color de fondo y de fuente se intercambian
---> listado de favoritos en la izquierda (recomendable array para almacenar favoritos)
---> series favoritas deben seguir apareciendo a la izquierda aunque la usuaria realice otra búsqueda
+-->[X] color de fondo y de fuente se intercambian
+-->[X] listado de favoritos en la izquierda (recomendable array para almacenar favoritos)
+-->[X] series favoritas deben seguir apareciendo a la izquierda aunque la usuaria realice otra búsqueda
 
 PUNTO 4
-1.Hay que almacenar el listado de favoritos en el localStorage. De esta forma, al recargar la página el listado de favoritos se debe mostrarse
+1.[X] Hay que almacenar el listado de favoritos en el localStorage. De esta forma, al recargar la página el listado de favoritos se debe mostrarse
 
 PUNTO 5 BONUS
 1. Borrar favoritos del localStorage y otras cosas mas. Mirar el enunciado
 
 PUNTO 6
-1. Afinar la maquetacion
+1.[X] Afinar la maquetacion
 */
 
 const buttonSearch = document.querySelector('.js-button-search');
@@ -70,7 +70,8 @@ function renderFavoriteAnime(list) {
     let html = "";
     if(list.length > 0) {
         for (const listFavorite of list) {
-        html += `<li class="js-single-element" id="${listFavorite.mal_id}"><img src="${listFavorite.images.jpg.image_url}" alt="new-image" /><h3 class="title-anime">${listFavorite.title}</h3></li>`;
+        html += `<li class="js-single-element " id="${listFavorite.mal_id}">
+        <i class="fa-solid fa-circle-xmark"></i><img src="${listFavorite.images.jpg.image_url}" alt="new-image" /><h3 class="title-anime list-favorite">${listFavorite.title}</h3></li>`;
     }
     }
     
