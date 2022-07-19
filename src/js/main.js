@@ -93,8 +93,8 @@ function handleClickResetAnime(event) {
         localStorage.setItem("animeFavouriteList", JSON.stringify(animeFavouriteList)); // safe favorite list in local storage
     }
 }
-listAnimeFavorite.addEventListener("click", handleClickResetAnime)
 
+listAnimeFavorite.addEventListener("click", handleClickResetAnime)
 
 // Fetch to anime api after user button search click
 function handleClickSearch(ev) {
