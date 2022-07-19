@@ -35,6 +35,12 @@
     padding-top: 0;
     border: none;
 }
+.button-search:hover, .button-reset:hover {
+    cursor: pointer;
+    height: 30px;
+    width: 70px;
+    
+}
 
 .list-anime {
     margin: 10px 15px;
