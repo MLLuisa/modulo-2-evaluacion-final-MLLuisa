@@ -56,6 +56,9 @@ function renderFavoriteAnime(list) {
 
 // Show favorite after user click (left side) and list anime (right side)
 function handleClickFavourite(ev) {
+    if(ev.target.nodeName === "LI") {
+        return
+    }
     let currentLiElement = ev.target.parentElement
     const idSelected = parseInt(currentLiElement.dataset.id);
     const animeFound = animeSeriesList.find((anime) => anime.mal_id === idSelected);
@@ -103,7 +106,6 @@ function handleClickSearch(ev) {
         animeSeriesList = data.data;
         renderAnime(animeSeriesList);
     })
-    // .catch((error) => renderError(error.message))
 }
 
 buttonSearch.addEventListener("click" , handleClickSearch);
