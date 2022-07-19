@@ -8,6 +8,19 @@
     padding: 10px 15px;
 }
 
+.image-title-div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+.anime-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+}
+
 .form {
     padding: 10px 15px
 }
