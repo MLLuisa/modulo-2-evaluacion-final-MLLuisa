@@ -7,6 +7,7 @@ const listAnimeFavorite = document.querySelector('.js-list-anime-favorite');
 const buttonReset = document.querySelector('.js-button-reset');
 let animeSeriesList = [];
 let animeFavouriteList; 
+let animeType = ["OVA", "Special"];
 
 if(localStorage.getItem("animeFavouriteList")) {
     animeFavouriteList = JSON.parse(localStorage.getItem("animeFavouriteList"))
@@ -30,12 +31,18 @@ function addListenerToAnimeListItem() {
 function renderAnime(list) {
     let html = "";
     for (const eachTitlePhoto of list) {
+        let animeTypeOne = animeType.find((type) => type === eachTitlePhoto.type )
+        let history = "";
+        if(animeTypeOne !== undefined) {
+            history = "Historia especial";
+        }
     if(eachTitlePhoto.images.jpg.image_url === noImage || eachTitlePhoto.images.jpg.image_url === null) {
-        html += `<li class="js-single-element" data-id="${eachTitlePhoto.mal_id}"><img src="${newImage}" alt="new-image" /><h3 class="title-anime">${eachTitlePhoto.title}</h3></li>`;
+        html += `<li class="js-single-element" data-id="${eachTitlePhoto.mal_id}"><img src="${newImage}" alt="new-image" /><h3 class="title-anime">${eachTitlePhoto.title}</h3><p>${eachTitlePhoto.type}${animeTypeOne}${history}</p></li>`;
     } else {
         html += `<li class="js-single-element" data-id="${eachTitlePhoto.mal_id}"><img src="${eachTitlePhoto.images.jpg.image_url}" alt="serie-anime" />
-        <h3 class="title-anime">${eachTitlePhoto.title}</h3></li>`;
+        <h3 class="title-anime">${eachTitlePhoto.title}</h3><p>${eachTitlePhoto.type}${animeTypeOne}${history}</p></li>`;
     }
+    
     }
     listAnime.innerHTML = html;
     addListenerToAnimeListItem();
