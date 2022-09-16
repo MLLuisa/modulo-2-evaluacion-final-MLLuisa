@@ -26,7 +26,7 @@ function addListenerToAnimeListItem() {
     }
 }
 
-// Shows the anime list afer input user
+// Shows the anime list after input user
 function renderAnime(list) {
     let html = "";
     for (const eachTitlePhoto of list) {
