@@ -30,22 +30,22 @@
   font-size: 16px; }
 
 .button-search, .button-reset {
-  color: darkgray;
+  color: black;
   font-weight: bold;
   font-size: 16px;
   background-color: aqua;
   opacity: 0.8;
   border-radius: 5px;
-  height: 29px;
-  width: 65px;
+  height: 32px;
+  width: 80px;
   margin-left: 10px;
   padding-top: 0;
   border: none; }
 
 .button-search:hover, .button-reset:hover {
   cursor: pointer;
-  height: 30px;
-  width: 70px; }
+  background-color: #003a3a;
+  color: white; }
 
 .list-anime {
   margin: 10px 15px;
@@ -105,6 +105,10 @@
   position: relative;
   width: 250px; }
 
+.js-single-element:hover {
+  cursor: pointer;
+  opacity: 0.8; }
+
 .js-remove-item-button {
   background-color: black;
   color: red;
@@ -112,5 +116,8 @@
   font-size: 24px;
   border: none;
   cursor: pointer; }
+
+.js-remove-item-button:hover {
+  opacity: 0.7; }
 
 /*# sourceMappingURL=main.css.map */
