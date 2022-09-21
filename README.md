@@ -2,7 +2,7 @@
 
 Here's my final exercise of module 2 (Javascript) Adalab Bootcamp made with Js, html and css 👩‍💻
 
-Visit the app in this link 👉 http://beta.adalab.es/modulo-2-evaluacion-final-MLLuisa/
+Visit the app in this link 👉 https://mlluisa.github.io/modulo-2-evaluacion-final-MLLuisa/
 
 #### This is how it works
 
